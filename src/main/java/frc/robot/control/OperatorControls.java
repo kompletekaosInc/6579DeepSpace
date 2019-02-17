@@ -52,7 +52,7 @@ public class OperatorControls extends PSController {
 
     @Override
     protected void processCircle(Robot robot) {
-        robot.getLift().toEncoderHeight(64);
+        robot.getLift().toEncoderHeight(70);
     }
 
     @Override

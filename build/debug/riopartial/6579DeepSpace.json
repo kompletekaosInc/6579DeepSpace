@@ -5,12 +5,5 @@
     "debugfile": "frcJava_roborio.debugconfig",
     "project": "6579DeepSpace",
     "language": "java"
-  },
-  {
-    "artifact": "frcJava (in project DeepSpace6579)",
-    "target": "roborio",
-    "debugfile": "frcJava_roborio.debugconfig",
-    "project": "DeepSpace6579",
-    "language": "java"
   }
 ]
