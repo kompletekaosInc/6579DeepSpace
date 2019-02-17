@@ -93,7 +93,7 @@ public class DriverControls extends PSController {
     @Override
     protected void processShare(Robot robot) {
         //super.processShare(robot);
-        robot.getDrivetrain().setCargoToFront();
+        robot.getDrivetrain().setHatchToFront();
       //  SmartDashboard.putString("Which subsystem is at front", "Cargo is the front");
         //robot.getIntake().up();
     }
@@ -102,7 +102,7 @@ public class DriverControls extends PSController {
     @Override
     protected void processOptions(Robot robot) {
         //robot.getIntake().down();
-        robot.getDrivetrain().setHatchToFront();
+        robot.getDrivetrain().setCargoToFront();
       //  SmartDashboard.putString("Which subsystem is at front", "Hatch is the front");
     }
 
