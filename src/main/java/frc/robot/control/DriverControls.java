@@ -45,12 +45,14 @@ public class DriverControls extends PSController {
     protected void processSquare(Robot robot) {
         //super.processSquare(robot);
         //robot.getLift().liftUp(1);
+        robot.getIntake().down();
     }
 
     @Override
     protected void processCircle(Robot robot) {
         //super.processCircle(robot);
         //robot.getLift().liftDown(0.5);
+        robot.getIntake().up();
     }
 
     @Override
@@ -113,6 +115,7 @@ public class DriverControls extends PSController {
         //robot.getLift().stopLift();
         //robot.getIntake().hold();
         //robot.getLift().hold();
+        robot.getIntake().stopArm();
 
 
     }

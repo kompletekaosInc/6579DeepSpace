@@ -7,6 +7,8 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import static java.lang.Math.abs;
+
 public class Lift implements SubSystem {
 
     private static final double HOLD_POWER = 0.03;
@@ -20,8 +22,12 @@ public class Lift implements SubSystem {
     private CANEncoder encoder1;
     //private CANEncoder encoder2;
 
-    private static double cmToEncoderValues = 1;
+    private static double cmToEncoderValues = 1.6233804196;
+    private static double encoderToCmValue = 0.6159985595;
+
     private boolean isHolding = false;
+
+    private double bottomValue;
 
 
     public Lift(){
@@ -37,6 +43,8 @@ public class Lift implements SubSystem {
 
         encoder1 = spark7.getEncoder();
 
+        bottomValue = encoder1.getPosition();
+
     }
 
     /**
@@ -50,7 +58,7 @@ public class Lift implements SubSystem {
      * This drives teh lift up at the designated speed
      * @param power
      */
-    public void liftSet(double power){
+    private void liftSet(double power){
         lift.set(power);
     }
 
@@ -73,7 +81,7 @@ public class Lift implements SubSystem {
      * This method drives the lift up to the specified encoder height
      * @param height
      */
-    public void driveUpToEncoder(double height, double power){
+    private void driveUpToEncoder(double height, double power){
 
         double heightAdjusted = height * cmToEncoderValues;
         //
@@ -88,13 +96,37 @@ public class Lift implements SubSystem {
      * This method drives the lift down to the specified height
      * @param height
      */
-    public void driveDownToEncoder(double height, double power){
+    private void driveDownToEncoder(double height, double power){
 
         double heightAdjusted = height * cmToEncoderValues;
 
         //ToDo: Ramp up/down?
         while (encoder1.getPosition()>=heightAdjusted){
             liftDown(power);
+        }
+        stopLift();
+
+
+    }
+
+    public void toEncoderHeight(double height){
+
+        double positionWanted = height + getBottomValue() - encoder1.getPosition();
+
+        //double heightAdjusted = positionWanted * cmToEncoderValues;
+
+        if (positionWanted>=0){
+            //driveUpToEncoder(positionWanted,power);
+            while (encoder1.getPosition()<=positionWanted){
+                liftUp(1);
+            }
+            stopLift();
+        }else{
+            //driveDownToEncoder(abs(positionWanted),power);
+            while (encoder1.getPosition()>=positionWanted){
+                liftDown(-0.4);
+            }
+            stopLift();
         }
         stopLift();
 
@@ -108,6 +140,14 @@ public class Lift implements SubSystem {
         isHolding = true;
     }
 
+    public void setBottomValue(){
+        bottomValue = encoder1.getPosition();
+    }
+
+    public double getBottomValue(){
+        return bottomValue;
+    }
+
 //ToDo: other lift methods?
 
     @Override
@@ -115,6 +155,7 @@ public class Lift implements SubSystem {
         SmartDashboard.putNumber(("spark8 encoder position: "), encoder1.getPosition());
         SmartDashboard.putNumber("Spark8 encoder velocity: ", encoder1.getVelocity());
         SmartDashboard.putBoolean("holding",isHolding);
+        SmartDashboard.putNumber("Bottom pos",bottomValue);
 
     }
 

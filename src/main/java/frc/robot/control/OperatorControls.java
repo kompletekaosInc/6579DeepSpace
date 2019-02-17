@@ -42,16 +42,17 @@ public class OperatorControls extends PSController {
     @Override
     protected void processCross(Robot robot) {
 
+        robot.getLift().toEncoderHeight(35);
     }
 
     @Override
     protected void processSquare(Robot robot) {
-
+        robot.getLift().toEncoderHeight((robot.getLift().getBottomValue()));
     }
 
     @Override
     protected void processCircle(Robot robot) {
-
+        robot.getLift().toEncoderHeight(64);
     }
 
     @Override
@@ -61,12 +62,12 @@ public class OperatorControls extends PSController {
 
     @Override
     protected void processL1(Robot robot) {
-        robot.getIntake().up();
+
     }
 
     @Override
     protected void processR1(Robot robot) {
-        robot.getIntake().down();
+
     }
 
     @Override
@@ -90,8 +91,14 @@ public class OperatorControls extends PSController {
     }
 
     @Override
+    protected void processTouchpad(Robot robot) {
+//        super.processTouchpad(robot);
+        robot.getLift().setBottomValue();
+    }
+
+    @Override
     protected void processNoButtons(Robot robot) {
-        robot.getIntake().stopArm();
+
         robot.getLift().hold();
     }
 }
