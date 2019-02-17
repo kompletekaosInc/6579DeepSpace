@@ -42,32 +42,40 @@ OperatorControls extends PSController {
 
     @Override
     protected void processCross(Robot robot) {
-
+        //bottom ball
         robot.getLift().toEncoderHeight(35);
     }
 
     @Override
     protected void processSquare(Robot robot) {
+        //to base/bottom hatch
         robot.getLift().toEncoderBase();
     }
 
     @Override
     protected void processCircle(Robot robot) {
+        //to middle ball
         robot.getLift().toEncoderHeight(71);
     }
 
     @Override
     protected void processTriangle(Robot robot) {
-        //top ball
+        //middle hatch is 55.7147865295 - 10.7619562149...
+        robot.getLift().toEncoderHeight(45);
+
     }
 
     @Override
     protected void processL1(Robot robot) {
-
+        //top hatch
+        robot.getLift().toEncoderHeight(77);
     }
 
     @Override
     protected void processR1(Robot robot) {
+
+        //top ball  103.859402... - 10.1429014
+        robot.getLift().toEncoderHeight(94);
 
     }
 

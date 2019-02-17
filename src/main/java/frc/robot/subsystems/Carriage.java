@@ -11,7 +11,7 @@ public class Carriage implements SubSystem {
 
     private VictorSP carriageFlywheel;
 
-    private static double suckInSpeed = 0.45;
+    private static double suckInSpeed = 0.5;
 
     private static double shootHighSpeed = -0.6;
 

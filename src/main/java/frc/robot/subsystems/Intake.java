@@ -8,7 +8,7 @@ public class Intake implements SubSystem {
     private VictorSP armMotor;
     private VictorSP rollers;
 
-    private static double inSpeed = -0.5;
+    private static double inSpeed = -0.6;
     private static double outSpeed = 0.5;
 
     private static double upSpeed = -0.215;
@@ -30,6 +30,19 @@ public class Intake implements SubSystem {
      * drives the arm up at the designated up speed
      */
     public void up(){
+
+
+
+        // one time power up the arm
+        if (!isUp)
+        {
+            double upTimer = System.currentTimeMillis()+100;
+            while (System.currentTimeMillis()<upTimer)
+            {
+                    armMotor.set(-0.6);
+            }
+        }
+
         armMotor.set(upSpeed);
         isUp = true;
     }
