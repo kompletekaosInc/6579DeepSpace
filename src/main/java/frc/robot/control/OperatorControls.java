@@ -4,7 +4,8 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.Robot;
 
-public class OperatorControls extends PSController {
+public class
+OperatorControls extends PSController {
 
 
     private Joystick controller1;
@@ -47,7 +48,7 @@ public class OperatorControls extends PSController {
 
     @Override
     protected void processSquare(Robot robot) {
-        robot.getLift().toEncoderHeight((robot.getLift().getBottomValue()));
+        robot.getLift().toEncoderBase();
     }
 
     @Override

@@ -111,25 +111,36 @@ public class Lift implements SubSystem {
 
     public void toEncoderHeight(double height){
 
-        double positionWanted = height + getBottomValue() - encoder1.getPosition();
+        double positionWanted = height + getBottomValue();
 
         //double heightAdjusted = positionWanted * cmToEncoderValues;
 
-        if (positionWanted>=0){
+        if (encoder1.getPosition()<positionWanted){
             //driveUpToEncoder(positionWanted,power);
-            while (encoder1.getPosition()<=positionWanted){
+            while (encoder1.getPosition()<positionWanted){
                 liftUp(1);
             }
             stopLift();
         }else{
             //driveDownToEncoder(abs(positionWanted),power);
-            while (encoder1.getPosition()>=positionWanted){
-                liftDown(-0.4);
+            while (encoder1.getPosition()>positionWanted){
+                liftDown(0.4);
             }
             stopLift();
         }
         stopLift();
 
+    }
+
+    public void toEncoderBase(){
+
+        double positionWanted = getBottomValue();
+
+
+        while (encoder1.getPosition()>positionWanted){
+            liftDown(0.4);
+        }
+        stopLift();
     }
 
     /**

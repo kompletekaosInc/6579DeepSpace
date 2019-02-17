@@ -11,8 +11,8 @@ public class Intake implements SubSystem {
     private static double inSpeed = -0.5;
     private static double outSpeed = 0.5;
 
-    private static double upSpeed = -0.6;
-    private static double downSpeed = 0.6;
+    private static double upSpeed = -0.215;
+    private static double downSpeed = 0.2;
 
     private boolean isUp = true;
 
