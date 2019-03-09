@@ -112,6 +112,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
+    // this year auto is the sandstorm, drivers can operate the robot in auto
+    driveRobot();
 
   }
 
@@ -130,6 +132,13 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
 
+    driveRobot();
+  }
+
+  /**
+   * Helper method to allow drivers to give commands to the robot.
+   */
+  private void driveRobot() {
     if (robotControl != null) {
       robotControl.giveCommands(this);
     }
@@ -139,7 +148,7 @@ public class Robot extends TimedRobot {
     }
 
     publishSubSystemStats();
-}
+  }
 
 
   //Accessor methods

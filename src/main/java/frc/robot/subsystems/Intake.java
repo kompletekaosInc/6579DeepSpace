@@ -43,7 +43,7 @@ public class Intake implements SubSystem {
             }
         }
 
-        armMotor.set(upSpeed);
+        armMotor.set(upSpeed);  // remove this line to prevent motor holding the arm up all the time
         isUp = true;
     }
 

@@ -45,6 +45,10 @@ public class Lift implements SubSystem {
         spark7 = new CANSparkMax(7, MotorType.kBrushless);
         spark8 = new CANSparkMax(8, MotorType.kBrushless);
 
+        // the ramp rate should remove the jump in movement as the motors ramp up to the target speed
+        spark7.setRampRate(1);
+        spark8.setRampRate(1);
+
         lift = new SpeedControllerGroup(spark7,spark8);
 
         encoder1 = spark7.getEncoder();
