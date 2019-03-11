@@ -50,7 +50,7 @@ public class Lift implements SubSystem {
         // the ramp rate should remove the jump in movement as the motors ramp up to the target speed
         //spark7.setRampRate(1);
         //spark8.setRampRate(1);
-        spark8.setOpenLoopRampRate(0.5);
+        //spark8.setOpenLoopRampRate(0.5);
         //spark7.setOpenLoopRampRate(0.5);
 
         spark8.follow(lift);
