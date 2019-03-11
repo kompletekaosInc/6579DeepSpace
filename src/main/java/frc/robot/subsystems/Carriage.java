@@ -15,7 +15,7 @@ public class Carriage implements SubSystem {
 
     private static double shootHighSpeed = -0.6;
 
-    private static double spillSpeed = -0.3;
+    private static double spillSpeed = -0.5;
 
     public Carriage(){
 

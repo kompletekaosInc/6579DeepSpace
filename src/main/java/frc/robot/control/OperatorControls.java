@@ -4,8 +4,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.Robot;
 
-public class
-OperatorControls extends PSController {
+public class OperatorControls extends PSController {
 
 
     private Joystick controller1;
@@ -43,7 +42,7 @@ OperatorControls extends PSController {
     @Override
     protected void processCross(Robot robot) {
         //bottom ball
-        robot.getLift().toEncoderHeight(35);
+        robot.getLift().toEncoderHeight(32);
     }
 
     @Override
@@ -55,20 +54,20 @@ OperatorControls extends PSController {
     @Override
     protected void processCircle(Robot robot) {
         //to middle ball
-        robot.getLift().toEncoderHeight(71);
+        robot.getLift().toEncoderHeight(62);
     }
 
     @Override
     protected void processTriangle(Robot robot) {
         //middle hatch is 55.7147865295 - 10.7619562149...
-        robot.getLift().toEncoderHeight(45);
+        robot.getLift().toEncoderHeight(42);
 
     }
 
     @Override
     protected void processL1(Robot robot) {
         //top hatch
-        robot.getLift().toEncoderHeight(77);
+        robot.getLift().toEncoderHeight(74);
     }
 
     @Override
@@ -81,22 +80,22 @@ OperatorControls extends PSController {
 
     @Override
     protected void processL2(Robot robot) {
-        robot.getLift().liftUp(1);
+        robot.getLift().liftUp(0.7);
     }
 
     @Override
     protected void processR2(Robot robot) {
-        robot.getLift().liftDown(0.4);
+        robot.getLift().liftDown(0.1);
     }
 
     @Override
     protected void processShare(Robot robot) {
-
+        robot.getLift().toEncoderHeight(5);
     }
 
     @Override
     protected void processOptions(Robot robot) {
-
+        robot.getLift().toEncoderHeight(45);
     }
 
     @Override
@@ -104,6 +103,8 @@ OperatorControls extends PSController {
 //        super.processTouchpad(robot);
         robot.getLift().setBottomValue();
     }
+
+    
 
     @Override
     protected void processNoButtons(Robot robot) {

@@ -12,7 +12,7 @@ public class Intake implements SubSystem {
     private static double outSpeed = 0.5;
 
     private static double upSpeed = -0.215;
-    private static double downSpeed = 0.2;
+    private static double downSpeed = 0.4;
 
     private boolean isUp = true;
 
@@ -43,7 +43,8 @@ public class Intake implements SubSystem {
             }
         }
 
-        armMotor.set(upSpeed);  // remove this line to prevent motor holding the arm up all the time
+        //armMotor.set(upSpeed);  // remove this line to prevent motor holding the arm up all the time
+        stopArm();        
         isUp = true;
     }
 

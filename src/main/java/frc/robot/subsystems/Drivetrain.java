@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 
 public class Drivetrain implements SubSystem {
 
-    private boolean cargoIsFront = true;
+    private boolean cargoIsFront = false;
 
 
     private VictorSP leftTB1 = new VictorSP(0);

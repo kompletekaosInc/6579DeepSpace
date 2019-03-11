@@ -4,6 +4,8 @@ import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 //import com.revrobotics.CANSparkMaxLowLevel;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -14,13 +16,13 @@ import static java.lang.Math.abs;
 
 public class Lift implements SubSystem {
 
-    private static final double HOLD_POWER = 0.03;
+    private static final double HOLD_POWER = 0.025;
 
 
-    private CANSparkMax spark7;
+    private CANSparkMax lift;
     private CANSparkMax spark8;
 
-    private SpeedControllerGroup lift;
+    //private SpeedController lift;
 
     private CANEncoder encoder1;
     //private CANEncoder encoder2;
@@ -42,16 +44,20 @@ public class Lift implements SubSystem {
 //        spark8 = new CANSparkMax(8, CANSparkMaxLowLevel.MotorType.kBrushless);
 //        spark7 = new CANSparkMax(7, CANSparkMaxLowLevel.MotorType.kBrushless);
 
-        spark7 = new CANSparkMax(7, MotorType.kBrushless);
+        lift = new CANSparkMax(7, MotorType.kBrushless);
         spark8 = new CANSparkMax(8, MotorType.kBrushless);
 
         // the ramp rate should remove the jump in movement as the motors ramp up to the target speed
-        spark7.setRampRate(1);
-        spark8.setRampRate(1);
+        //spark7.setRampRate(1);
+        //spark8.setRampRate(1);
+        spark8.setOpenLoopRampRate(0.5);
+        //spark7.setOpenLoopRampRate(0.5);
 
-        lift = new SpeedControllerGroup(spark7,spark8);
+        spark8.follow(lift);
 
-        encoder1 = spark7.getEncoder();
+        //lift = spark7;
+
+        encoder1 = lift.getEncoder();
 
         bottomValue = encoder1.getPosition();
 
@@ -170,6 +176,7 @@ public class Lift implements SubSystem {
         //this flag indicates if the worker should drive
         private volatile boolean isDriving = false;  // default we have nothing to do
         private volatile double positionWanted;
+        private double liftPower = 0;
 
 
 
@@ -212,12 +219,53 @@ public class Lift implements SubSystem {
         {
             //System.out.println("LiftWorker.toEncoderPosition:positionWanted="+positionWanted);
             long startTime = System.currentTimeMillis();
+            long currentTime;
+            long timeTaken;
+            long rampTimeMS = 1000;
 
             //determine if we are going up or down
             if (encoder1.getPosition()<positionWanted){
                 //driveUpToEncoder(positionWanted,power);
                 while ((isLessThanLimit(startTime)) && (encoder1.getPosition()<positionWanted)){
-                    liftUp(1);
+
+                    currentTime = System.currentTimeMillis();
+                    timeTaken = currentTime-startTime;
+
+                    // if (timeTaken<=rampTimeMS){
+                    //     liftPower = (timeTaken/1000)*1.5;
+                    //     // if (timeTaken<=400){
+                    //     //     liftPower = liftPower*2;
+                    //     // }
+                    //     // else if ((timeTaken<=800)&&(timeTaken>=401)){
+                    //     //     liftPower = 0.8;
+                    //     // }
+
+                        
+                    //     if (liftPower>=1){
+                    //         liftPower = 1;
+                    //     }
+                    //     else if (liftPower<=0.2){
+                    //         liftPower = 0.25;
+                    //     }
+                    //     //liftUp(liftPower);
+                    // }
+                    // liftUp(liftPower);
+                    
+
+
+                    if (encoder1.getPosition()<=15){
+                        liftPower = encoder1.getPosition()/(15);
+                        if (liftPower<=0.2){
+                            liftPower=0.25;
+                        }
+                        liftUp(liftPower);
+                    }
+                    else if (encoder1.getPosition()>=(positionWanted-10)){
+                        liftUp(0.6);
+                    }
+                    else{
+                        liftUp(1);
+                    }
                 }
                 stopLift();
             }
