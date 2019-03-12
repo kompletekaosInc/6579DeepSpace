@@ -104,11 +104,24 @@ public class OperatorControls extends PSController {
         robot.getLift().setBottomValue();
     }
 
+    @Override
+    protected void processLStick(Robot robot) {
+        //super.processLStick(robot);
+        robot.getClimber().liftRobot();
+    }
+
+    @Override
+    protected void processRStick(Robot robot) {
+        //super.processRStick(robot);
+        robot.getClimber().retractCylinder();
+    }
+
     
 
     @Override
     protected void processNoButtons(Robot robot) {
 
         robot.getLift().hold();
+        //robot.getClimber().retractCylinder();
     }
 }

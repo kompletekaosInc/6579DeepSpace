@@ -37,6 +37,7 @@ public class Robot extends TimedRobot {
   private Carriage carriage;
   private Hatch hatch;
   private Cameras cameras;
+  private Climber climber;
 
   //creating a list of all the subsystems
   private List subSystems = new ArrayList();
@@ -63,6 +64,7 @@ public class Robot extends TimedRobot {
       carriage = new Carriage();
       hatch = new Hatch();
       cameras = new Cameras();
+      climber = new Climber();
 
       subSystems.add(drivetrain);
       subSystems.add(lift);
@@ -70,6 +72,7 @@ public class Robot extends TimedRobot {
       subSystems.add(carriage);
       subSystems.add(hatch);
       subSystems.add(cameras);
+      subSystems.add(climber);
     }catch (Exception e){
       System.out.println("Error loading subsystems");
       e.printStackTrace();
@@ -168,6 +171,10 @@ public class Robot extends TimedRobot {
 
   public Lift getLift() {
     return lift;
+  }
+
+  public Climber getClimber(){
+    return climber;
   }
 
   public void publishSubSystemStats()
