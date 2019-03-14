@@ -122,6 +122,7 @@ public class OperatorControls extends PSController {
     protected void processNoButtons(Robot robot) {
 
         robot.getLift().hold();
+        robot.getLift().resetBase();
         //robot.getClimber().retractCylinder();
     }
 }

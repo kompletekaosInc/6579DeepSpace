@@ -5,12 +5,9 @@ import com.revrobotics.CANSparkMax;
 //import com.revrobotics.CANSparkMaxLowLevel;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Logger;
 
 import static java.lang.Math.abs;
 
@@ -36,6 +33,7 @@ public class Lift implements SubSystem {
 
     // we need a worker to drive the lift to presets
     private LiftWorker liftWorker;
+    private boolean isAutoReset;
 
 
     public Lift(){
@@ -134,6 +132,17 @@ public class Lift implements SubSystem {
         }
     }
 
+    public void resetBase(){
+        //boolean isAutoReset;
+        if ((encoder1.getVelocity()==0)&&(encoder1.getPosition()<=(getBottomValue()+5))){
+            setBottomValue();
+            isAutoReset = true;
+        }
+        else{
+            isAutoReset = false;
+        }
+    }
+
     public void setBottomValue(){
         bottomValue = encoder1.getPosition();
     }
@@ -150,6 +159,7 @@ public class Lift implements SubSystem {
         SmartDashboard.putNumber("Spark8 encoder velocity: ", encoder1.getVelocity());
         SmartDashboard.putBoolean("holding",isHolding);
         SmartDashboard.putNumber("Bottom pos",bottomValue);
+        SmartDashboard.putBoolean("isAutoReset", isAutoReset);
 
     }
 
