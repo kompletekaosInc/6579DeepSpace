@@ -107,13 +107,13 @@ public class OperatorControls extends PSController {
     @Override
     protected void processLStick(Robot robot) {
         //super.processLStick(robot);
-        robot.getClimber().liftRobot();
+        //robot.getClimber().liftRobot();
     }
 
     @Override
     protected void processRStick(Robot robot) {
         //super.processRStick(robot);
-        robot.getClimber().retractCylinder();
+        //robot.getClimber().retractCylinder();
     }
 
     
