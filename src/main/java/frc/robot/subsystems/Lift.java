@@ -134,7 +134,7 @@ public class Lift implements SubSystem {
 
     public void resetBase(){
         //boolean isAutoReset;
-        if ((encoder1.getVelocity()==0)&&(encoder1.getPosition()<=(getBottomValue()+5))){
+        if ((encoder1.getVelocity()<=0.01)&&(encoder1.getPosition()<=(getBottomValue()+5))){
             setBottomValue();
             isAutoReset = true;
         }
