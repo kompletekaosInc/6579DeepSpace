@@ -15,15 +15,16 @@ public class Cameras implements SubSystem {
     public Cameras(){
         //we assume this is cargo
         camera1 = CameraServer.getInstance().startAutomaticCapture(0);
-        camera1.setFPS(15);
+        camera1.setFPS(10);
 
         //Full HD 1080p video calling (up to 1920 x 1080 pixels;
         //720p HD video calling (up to 1280 x 720 pixels) with supported clients
-        camera1.setResolution(1280, 720);
+        camera1.setResolution(320,180);
 
         //we assume this is hatch
         camera2 = CameraServer.getInstance().startAutomaticCapture(1);
-        camera2.setFPS(15);
+        camera2.setFPS(7);
+        camera2.setResolution(320, 180);
 /*
         server = CameraServer.getInstance().getServer();
         camera1.setConnectionStrategy(VideoSource.ConnectionStrategy.kKeepOpen);
